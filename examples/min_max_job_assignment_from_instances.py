@@ -46,12 +46,7 @@ gr = GroupRule()
 gr.set_cardinality(Worker, 1, 1) # exactly 1 worker per job
 gr.set_cardinality(Job, 1, 1) # exactly 1 job per worker
 
-gr.set_optimized_objective_function("minimize_sum_of_single_statistic") # using the sum of the statistic as the objective function
+gr.set_optimized_objective_function("minimize_max_of_single_statistic") # using the sum of the statistic as the objective function
 gr.add_statistic(skill_allignment) # adding the skill alignment statistic
 
-groups = [
-    Group().add_member(workers[0], jobs[1]),
-    Group().add_member(workers[1], jobs[1]),
-]
-
-print("Awnser: ", optimize(gr, groups))
+print("Awnser: ", optimize(gr, workers + jobs))

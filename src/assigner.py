@@ -1,5 +1,6 @@
 from src.solvers.base_solver import *
 from src.solvers.hungarian_algorithm import HungarianAlgorithm 
+from src.solvers.bin_search_hungarian_algorithm import BinSearchHungarianAlgorithm
 from typing import List, Type
 
 class Assigner:

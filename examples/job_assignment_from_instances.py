@@ -27,6 +27,8 @@ def skill_allignment(members: dict[Type, List]):
 
     return abs(workers.skills - jobs.skills)
 
+random.seed(42)  # For reproducibility
+
 # Create instances
 workers = [
     Worker("Alice"), Worker("Bob"), Worker("Charlie"),
@@ -39,8 +41,6 @@ jobs = [
     Job("Painting"), Job("Electrical"), Job("Plumbing"),
     Job("Cleaning"), Job("Gardening")
 ]
-
-random.seed(42)  # For reproducibility
 
 gr = GroupRule()
 gr.set_cardinality(Worker, 1, 1) # exactly 1 worker per job

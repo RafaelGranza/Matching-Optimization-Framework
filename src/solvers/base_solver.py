@@ -28,21 +28,6 @@ class Solver:
         """
         raise NotImplementedError("Subclasses should implement this method.")
 
-class BinSearchHungarianAlgorithm(Solver):
-    """
-    Solver using a binary search approach combined with the Hungarian algorithm.
-    """
-
-    @staticmethod
-    def can_solve(group_rule: GroupRule):
-        # Check if the group can be solved using the binary search + Hungarian algorithm
-        return True  # Placeholder for actual logic
-
-    @staticmethod
-    def solve(group_rule: GroupRule, *instances):
-        # Implement the binary search + Hungarian algorithm to solve the assignment problem
-        pass  # Placeholder for actual logic
-
 class StableMarriage(Solver):
     """
     Solver using the Gale-Shapley algorithm for stable marriage problems.
