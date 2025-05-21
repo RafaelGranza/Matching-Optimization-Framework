@@ -43,9 +43,15 @@ class GroupRule:
     It allows setting cardinality rules, adding statistics and validators, and defining objective functions.
     """
 
-    objective_function = None
-    objective_function_name = "None"
+    objective_function = lambda stats: 0
+    objective_function_name = "no_statistic"
 
+    """
+    A flag to indicate if the matching should be stable.
+    If True, the matching will be stable.
+    The instances MUST have a "preference" attribute for this to work.
+    """
+    stable_match = False
 
     valid_functions = {
         "minimize_sum_of_single_statistic": lambda stats: sum(stats),
@@ -54,6 +60,7 @@ class GroupRule:
         "maximize_sum_of_single_statistic": lambda stats: -sum(stats),
         "maximize_min_of_single_statistic": lambda stats: -min(stats),
         "maximize_max_of_single_statistic": lambda stats: -max(stats),
+        "no_statistic": lambda stats: 0, # No statistic, just return 0
     }
 
     def __init__(self):
@@ -98,3 +105,6 @@ class GroupRule:
         for validator in self.validators:
             if not validator(group.members):
                 raise ValueError(f"Custom validator '{validator.__name__}' failed.")
+
+    def set_stable_match(self, stable_match: bool):
+        self.stable_match = stable_match
