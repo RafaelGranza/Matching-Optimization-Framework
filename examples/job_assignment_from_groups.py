@@ -3,6 +3,7 @@ import random
 from typing import List, Type
 from src.optimizer import optimize
 
+# Define the Objec Classes for the Example
 class Worker:
     def __init__(self, name):
         self.name = name
@@ -15,6 +16,7 @@ class Job:
         self.skills = random.randint(1, int(1e6)) # Simulating skills required
     def __repr__(self): return f"Job({self.title})"
 
+# Define the Statistic Function
 def skill_allignment(members: dict[Type, List]):
     """
     Example statistic function that calculates the difference between Workers' and Jobs' skills.
@@ -42,16 +44,17 @@ jobs = [
     Job("Cleaning"), Job("Gardening")
 ]
 
+# Create Groups
+groups = []
+for worker in workers:
+    for job in jobs:
+        groups.append(Group().add_member(worker, job))
+
+# Define the Group Rule
 gr = GroupRule()
 gr.set_cardinality(Worker, 1, 1) # exactly 1 worker per job
 gr.set_cardinality(Job, 1, 1) # exactly 1 job per worker
-
-gr.set_optimized_objective_function("minimize_sum_of_single_statistic") # using the sum of the statistic as the objective function
+gr.set_objective_function("minimize_sum_of_single_statistic")
 gr.add_statistic(skill_allignment) # adding the skill alignment statistic
 
-groups = [
-    Group().add_member(workers[0], jobs[1]),
-    Group().add_member(workers[1], jobs[1]),
-]
-
-print("Awnser: ", optimize(gr, groups))
+print("Answer: ", optimize(gr, groups))

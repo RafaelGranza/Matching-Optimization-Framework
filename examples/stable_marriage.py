@@ -1,3 +1,8 @@
+from src.group import Group, GroupRule
+import random
+from typing import List, Type
+from src.optimizer import optimize
+
 class Man:
     def __init__(self, name, preferences=None):
         self.name = name

@@ -33,6 +33,11 @@ class Group:
             return self.members
         return self.members.get(cls, [])
 
+    def get_members_as_list(self, cls=None):
+        if cls is None:
+            return [instance for instances in self.members.values() for instance in instances]
+        return self.members.get(cls, [])
+
     def __repr__(self):
         members_repr = (instance for instances in self.members.values() for instance in instances)
         return f"Group({', '.join(map(str, members_repr))})"
@@ -96,15 +101,22 @@ class GroupRule:
             raise ValueError("statistic must be a callable.")
         self.statistics.append(statistic)
 
-    def validate(self, group: Group):
+    def validate_or_raise(self, group: Group):
         for cls, (min_count, max_count) in self.cardinality_rules.items():
             count = len(group.members[cls])
             if not (min_count <= count <= max_count):
-                raise ValueError(f"Cardinality constraint violated for class {cls.__name__}: found {count}, expected {min_count} to {max_count}.")
+                raise ValueError(f"Cardinality constraint violated for class {cls.__name__}: found {count}, expected from {min_count} to {max_count}.")
 
         for validator in self.validators:
             if not validator(group.members):
                 raise ValueError(f"Custom validator '{validator.__name__}' failed.")
+
+    def validate(self, groups: Group):
+        try:
+            self.validate_or_raise(groups)
+        except ValueError as e:
+            return False
+        return True
 
     def set_stable_match(self, stable_match: bool):
         self.stable_match = stable_match

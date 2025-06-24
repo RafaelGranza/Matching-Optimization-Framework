@@ -7,7 +7,7 @@ def check_preference(prefer, n, m0, m1):
     """
     Check if element N prefers element M0 over element M1.
     """
-    return prefer[wn.index(m1) < prefer[n].index(m0)
+    return prefer[wn.index(m1)] < prefer[n].index(m0)
 
 
 def make_stable_pairs(type_a, type_b):
