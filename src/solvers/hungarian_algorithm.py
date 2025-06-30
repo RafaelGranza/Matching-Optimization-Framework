@@ -97,7 +97,7 @@ class HungarianAlgorithm(Solver):
         for cls, (min_count, max_count) in group_rule.cardinality_rules.items():
             if min_count != 1 or max_count != 1:
                 return False
-        return group_rule.objective_function_name == "minimize_sum_of_single_statistic"
+        return not getattr(group_rule, "quotas", None) and group_rule.objective_function_name == "minimize_sum_of_single_statistic"
 
     @staticmethod
     def solve_from_instances(group_rule: GroupRule, instances: List[object]):

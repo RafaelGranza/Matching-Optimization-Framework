@@ -78,7 +78,7 @@ gr.add_statistic(valid_group)
 gr.set_objective_function(objective_function)
 
 # Otimização sobre os grupos válidos
-result = optimize(gr, all_groups)
+result = solve(gr, all_groups)
 
 print("Solução encontrada:")
 for i, group in enumerate(result):

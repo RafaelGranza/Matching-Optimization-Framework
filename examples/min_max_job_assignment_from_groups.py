@@ -54,4 +54,4 @@ groups = [
     Group().add_member(workers[1], jobs[1]),
 ]
 
-print("Awnser: ", optimize(gr, groups))
+print("Awnser: ", solve(gr, groups))

@@ -3,6 +3,7 @@ from src.solvers.hungarian_algorithm import HungarianAlgorithm
 from src.solvers.bin_search_hungarian_algorithm import BinSearchHungarianAlgorithm
 from src.solvers.stable_mariage import StableMarriage
 from src.solvers.gen_algorithm import GeneticAlgorithm
+from src.solvers.fair_matching import FairBipartiteMatching
 from typing import List, Type
 
 class Assigner:
@@ -11,6 +12,7 @@ class Assigner:
         HungarianAlgorithm,
         BinSearchHungarianAlgorithm,
         StableMarriage,
+        FairBipartiteMatching,
         GeneticAlgorithm, # Metaheuristic solver
         # Add more solvers here as needed
         # e.g., SimulatedAnnealing, TabuSearch, etc.

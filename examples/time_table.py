@@ -105,7 +105,7 @@ gr.add_statistic(valid_group)  # Estatística que conta o número de membros no 
 gr.set_objective_function(objective_function)  # Usando a soma da estatística como função objetivo
 
 # Otimização
-result = optimize(gr, instances)
+result = solve(gr, instances)
 
 print("Solução encontrada:")
 for i, group in enumerate(result):

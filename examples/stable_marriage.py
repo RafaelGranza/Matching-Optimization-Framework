@@ -99,4 +99,4 @@ gr.set_cardinality(Man, 1, 1)
 gr.set_stable_match(True)
 gr.add_validator(stable_matching_validator)
 
-print("Awnser: ", optimize(gr, instances))
+print("Awnser: ", solve(gr, instances))

@@ -57,4 +57,4 @@ gr.set_cardinality(Job, 1, 1) # exactly 1 job per worker
 gr.set_objective_function("minimize_sum_of_single_statistic")
 gr.add_statistic(skill_allignment) # adding the skill alignment statistic
 
-print("Answer: ", optimize(gr, groups))
+print("Answer: ", solve(gr, groups))
