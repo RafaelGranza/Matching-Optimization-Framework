@@ -1,7 +1,7 @@
 from src.group import GroupRule
 import random
 from typing import List, Type
-from src.optimizer import optimize
+from src.solve import solve
 
 # Definições básicas das entidades
 class Professor:
@@ -102,7 +102,7 @@ gr.add_statistic(valid_group)  # Estatística que conta o número de membros no 
 
 
 
-gr.set_arbitrary_objective_function(objective_function)  # Usando a soma da estatística como função objetivo
+gr.set_objective_function(objective_function)  # Usando a soma da estatística como função objetivo
 
 # Otimização
 result = optimize(gr, instances)

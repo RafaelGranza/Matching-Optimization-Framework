@@ -1,7 +1,7 @@
 from src.group import Group, GroupRule
 import random
 from typing import List, Type
-from src.optimizer import optimize
+from src.solve import solve
 
 class Worker:
     def __init__(self, name):
@@ -46,7 +46,7 @@ gr = GroupRule()
 gr.set_cardinality(Worker, 1, 1) # exactly 1 worker per job
 gr.set_cardinality(Job, 1, 1) # exactly 1 job per worker
 
-gr.set_optimized_objective_function("minimize_sum_of_single_statistic") # using the sum of the statistic as the objective function
+gr.set_objective_function("minimize_sum_of_single_statistic") # using the sum of the statistic as the objective function
 gr.add_statistic(skill_allignment) # adding the skill alignment statistic
 
 print("Awnser: ", optimize(gr, workers + jobs))

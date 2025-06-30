@@ -1,7 +1,7 @@
 from src.group import Group, GroupRule
 import itertools
 from itertools import product
-from src.optimizer import optimize
+from src.solve import solve
 
 # Definições das entidades (iguais ao seu exemplo)
 class Professor:
@@ -75,7 +75,7 @@ gr.set_cardinality(Cohort, 1, 1)
 gr.set_cardinality(TimeWindow, 1, 1)
 gr.set_cardinality(Subject, 1, 1)
 gr.add_statistic(valid_group)
-gr.set_arbitrary_objective_function(objective_function)
+gr.set_objective_function(objective_function)
 
 # Otimização sobre os grupos válidos
 result = optimize(gr, all_groups)

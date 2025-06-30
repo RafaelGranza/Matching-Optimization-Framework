@@ -1,7 +1,7 @@
 from src.group import Group, GroupRule
 import random
 from typing import List, Type
-from src.optimizer import optimize
+from src.solve import solve
 
 # Define the Objec Classes for the Example
 class Worker:

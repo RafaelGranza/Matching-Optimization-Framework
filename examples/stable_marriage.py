@@ -1,7 +1,7 @@
 from src.group import Group, GroupRule
 import random
 from typing import List, Type
-from src.optimizer import optimize
+from src.solve import solve
 
 class Man:
     def __init__(self, name, preferences=None):

@@ -75,18 +75,18 @@ class GroupRule:
         self.types = []
         self.objective_function_name = None
 
-    def set_optimized_objective_function(self, function_name):
-        if function_name not in self.valid_functions:
-            raise ValueError(f"Invalid objective function: {function_name}")
-
-        self.objective_function_name = function_name
-        self.objective_function = self.valid_functions[function_name]
-
-    def set_arbitrary_objective_function(self, function):
-        if not callable(function):
-            raise ValueError("Objective function must be callable.")
-        self.objective_function = function
-        self.objective_function_name = "arbitrary"
+    def set_objective_function(self, function):
+        if isinstance(function, str):
+            function_name = function.lower()
+            if function_name not in self.valid_functions:
+                raise ValueError(f"Invalid objective function name: {function_name}")
+            self.objective_function_name = function_name
+            self.objective_function = self.valid_functions[function_name]
+        else:
+            if not callable(function):
+                raise ValueError("Objective function must be callable.")
+            self.objective_function = function
+            self.objective_function_name = "arbitrary"
 
     def set_cardinality(self, cls, min_count, max_count):
         self.cardinality_rules[cls] = (min_count, max_count)

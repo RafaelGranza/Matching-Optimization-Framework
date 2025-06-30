@@ -6,8 +6,8 @@ import numpy as np
 
 def optimize_by_instances(instances: List[object], group_rule: GroupRule, n_groups=3, n_generations=10000, pop_size=40, mutation_prob=0.5) -> List[Group]:
     '''
-    O cromossomo é um vetor binário de tamanho n_groups * n_instances, representando uma matriz n_groups x n_instances.
-    Um elemento pode pertencer a mais de um grupo.
+    The chromosome is a binary vector of size n_groups * n_instances, representing a n_groups x n_instances matrix.
+    An element can belong to more than one group.
     '''
     from deap import base, creator, tools, algorithms
     import random
@@ -22,14 +22,14 @@ def optimize_by_instances(instances: List[object], group_rule: GroupRule, n_grou
     toolbox = base.Toolbox()
 
     def random_individual():
-        # Vetor binário de tamanho n*m
+        # Binary vector of size n*m
         return [random.randint(0, 1) for _ in range(n * m)]
 
     toolbox.register("individual", tools.initIterate, creator.Individual, random_individual)
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 
     def mate(parent1, parent2):
-        # Crossover uniforme por gene
+        # Uniform crossover per gene
         child1 = [parent1[i] if random.random() < 0.5 else parent2[i] for i in range(n * m)]
         child2 = [parent2[i] if random.random() < 0.5 else parent1[i] for i in range(n * m)]
         return creator.Individual(child1), creator.Individual(child2)
@@ -41,7 +41,7 @@ def optimize_by_instances(instances: List[object], group_rule: GroupRule, n_grou
         return (ind,)
 
     def eval_grouping(ind):
-        # Converte vetor para matriz n x m
+        # Converts vector to n x m matrix
         mat = np.array(ind).reshape((n, m))
         group_objs = []
         for i in range(n):
@@ -51,11 +51,11 @@ def optimize_by_instances(instances: List[object], group_rule: GroupRule, n_grou
                 g.add_member(members)
                 group_objs.append(g)
         score = 0
-        # Validação
+        # Validation
         for g in group_objs:
             if not group_rule.validate(g):
                 score += -1e8
-        # Estatísticas
+        # Statistics
         score += group_rule.objective_function(group_objs) if group_objs else 0
         return (score,)
 
@@ -102,7 +102,7 @@ def optimize_by_groups(groups: List[Group], group_rule: GroupRule, n_generations
     def eval_selection(individual):
         selected_groups = [g for i, g in enumerate(groups) if individual[i]]
         score = 0
-        # Estatísticas
+        # Statistics
         score = group_rule.objective_function(selected_groups) if selected_groups else 0
         return (score,)
 
